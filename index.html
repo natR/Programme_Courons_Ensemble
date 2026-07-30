@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#77c8f2">
-<title>Courons Ensemble — Version 1.1</title>
+<title>Courons Ensemble — Version 1.1.1</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -71,8 +71,68 @@ input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:
 button.action{padding:12px 16px;border:0;border-radius:11px;background:var(--accent-dark);color:white;cursor:pointer;font-weight:bold}
 button.secondary{background:#607987}
 .footer-note{font-size:12px;color:var(--muted);margin-bottom:22px}
+
+.top-menu{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:20px;
+  padding-top:16px;
+  border-top:1px solid #ffffff70;
+}
+.menu-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:11px 16px;
+  border-radius:12px;
+  background:#ffffffa8;
+  color:#174c68;
+  font-weight:bold;
+  text-decoration:none;
+  transition:transform .15s,background .15s,box-shadow .15s;
+}
+.menu-link:hover,.menu-link:focus{
+  background:#fff;
+  transform:translateY(-1px);
+  box-shadow:0 6px 16px #247fae28;
+}
+.menu-link.active{
+  background:#176f9e;
+  color:#fff;
+}
+#programme,#conseils{
+  scroll-margin-top:18px;
+}
+.back-to-top{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  width:48px;
+  height:48px;
+  border:0;
+  border-radius:50%;
+  background:var(--accent-dark);
+  color:#fff;
+  font-size:24px;
+  font-weight:bold;
+  box-shadow:0 8px 22px #163f5560;
+  cursor:pointer;
+  opacity:0;
+  pointer-events:none;
+  transform:translateY(10px);
+  transition:opacity .2s,transform .2s;
+  z-index:20;
+}
+.back-to-top.visible{
+  opacity:1;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
 @media(max-width:800px){.cards,.advice-grid{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr 1fr}}
-@media(max-width:560px){.wrap{padding:10px}.summary{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.name input{width:min(230px,78vw)}.week-header{grid-template-columns:1fr auto auto;padding:15px}}
+@media(max-width:560px){.top-menu{display:grid;grid-template-columns:1fr 1fr}.menu-link{padding:10px 8px;font-size:13px}.wrap{padding:10px}.summary{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.name input{width:min(230px,78vw)}.week-header{grid-template-columns:1fr auto auto;padding:15px}}
 </style>
 </head>
 <body>
@@ -82,14 +142,21 @@ button.secondary{background:#607987}
     <div>
       <h1>Programme Courons Ensemble</h1>
       <p>5 semaines · 20 séances · votre progression reste enregistrée sur cet appareil.</p>
-      <span class="version">Version 1.1</span>
+      <span class="version">Version 1.1.1</span>
     </div>
     <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
   </div>
+
+  <nav class="top-menu" aria-label="Navigation principale">
+    <a href="#programme" class="menu-link active">🏃 Programme</a>
+    <a href="#conseils" class="menu-link">👨‍🏫 Conseils du coach</a>
+  </nav>
+
   <div class="progress-text"><span id="doneText">0 séance terminée sur 20</span><span id="percent">0 %</span></div>
   <div class="bar"><div id="bar"></div></div>
 </header>
 
+<main id="programme">
 <div class="summary">
   <div class="box"><small>Séances du programme</small><strong>20</strong></div>
   <div class="box"><small>Terminées</small><strong id="doneCount">0</strong></div>
@@ -522,7 +589,8 @@ button.secondary{background:#607987}
     </article></div></div>
     </section>
 
-<section class="coach">
+</main>
+<section class="coach" id="conseils">
   <div class="section-title">
     <h2>Conseils du coach</h2>
     <p>Des fiches pratiques inspirées des « points du jour » du programme.</p>
@@ -632,7 +700,7 @@ button.secondary{background:#607987}
   update();
 
   document.getElementById("export").addEventListener("click",function(){
-    var payload={version:"1.1",prenom:firstname.value,progression:saved};
+    var payload={version:"1.1.1",prenom:firstname.value,progression:saved};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
     var a=document.createElement("a");
     a.href=URL.createObjectURL(blob);
@@ -649,6 +717,44 @@ button.secondary{background:#607987}
   });
 })();
 </script>
+
+<script>
+(function(){
+  var links = Array.from(document.querySelectorAll(".menu-link"));
+  links.forEach(function(link){
+    link.addEventListener("click", function(){
+      links.forEach(function(item){ item.classList.remove("active"); });
+      link.classList.add("active");
+    });
+  });
+
+  var coach = document.getElementById("conseils");
+  var program = document.getElementById("programme");
+  if ("IntersectionObserver" in window && coach && program) {
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting) {
+          links.forEach(function(item){ item.classList.remove("active"); });
+          var selector = entry.target.id === "conseils" ? 'a[href="#conseils"]' : 'a[href="#programme"]';
+          var active = document.querySelector(selector);
+          if (active) active.classList.add("active");
+        }
+      });
+    }, {rootMargin:"-25% 0px -60% 0px", threshold:0});
+    observer.observe(program);
+    observer.observe(coach);
+  }
+
+  var back = document.getElementById("backToTop");
+  window.addEventListener("scroll", function(){
+    back.classList.toggle("visible", window.scrollY > 500);
+  }, {passive:true});
+  back.addEventListener("click", function(){
+    window.scrollTo({top:0, behavior:"smooth"});
+  });
+})();
+</script>
+
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
@@ -656,5 +762,8 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
+
+<button id="backToTop" class="back-to-top" type="button" aria-label="Retour en haut">↑</button>
+
 </body>
 </html>
