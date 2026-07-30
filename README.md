@@ -1,12 +1,13 @@
-# Programme Courons Ensemble
+# Programme Courons Ensemble — Version 1.1
 
-## Mise en ligne avec GitHub Pages
+Contenu :
+- semaines 1 à 5, soit 20 séances ;
+- conservation de l'historique existant grâce à la même clé de stockage local ;
+- repli automatique d'une semaine lorsque ses 4 séances sont terminées ;
+- nouvelle identité bleu clair ;
+- rubrique « Conseils du coach » ;
+- PWA installable sur iPhone et Android.
 
-1. Créez un nouveau dépôt GitHub nommé `Programme_Courons_Ensemble`.
-2. Ajoutez à la racine du dépôt tous les fichiers et le dossier `icons`.
-3. Ouvrez **Settings** → **Pages**.
-4. Dans **Build and deployment**, choisissez **Deploy from a branch**.
-5. Sélectionnez la branche **main** et le dossier **/(root)**, puis cliquez sur **Save**.
-6. Après publication, ouvrez l'adresse indiquée par GitHub Pages.
-
-Sur iPhone : ouvrez cette adresse dans Safari, appuyez sur **Partager**, puis **Sur l'écran d'accueil**.
+## Mise en ligne
+Remplacez les anciens fichiers du dépôt GitHub par tous les fichiers de ce dossier, en conservant la même arborescence.
+Le lien GitHub Pages reste inchangé.

@@ -2,361 +2,565 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Programme Courons Ensemble — temps corrigés</title>
-<style>
-:root{--bg:#f4f6f3;--card:#fff;--text:#1d2922;--muted:#68736c;--line:#dce3de;--accent:#2f6745}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:Arial,Helvetica,sans-serif}
-.wrap{max-width:1150px;margin:auto;padding:20px}
-header{background:linear-gradient(135deg,#203d2d,#37654a);color:white;border-radius:22px;padding:25px}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
-h1{margin:0 0 8px;font-size:clamp(30px,5vw,50px)} header p{margin:0;opacity:.85}
-.name{display:grid;gap:6px;font-size:13px} .name input{width:210px;padding:11px;border-radius:10px;border:1px solid #ffffff66;background:#ffffff18;color:white}
-.progress-text{display:flex;justify-content:space-between;margin-top:24px;font-weight:bold}
-.bar{height:14px;background:#ffffff33;border-radius:999px;overflow:hidden;margin-top:8px} .bar div{height:100%;width:0;background:white}
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
-.box{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px} .box small{color:var(--muted);display:block} .box strong{font-size:26px}
-.week{margin:25px 0} .week h2{display:flex;justify-content:space-between;align-items:center} .week h2 span{font-size:13px;color:var(--muted)}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.session{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--week);border-radius:16px;padding:17px}
-.session.done-card{opacity:.72} .session.done-card .exercise{text-decoration:line-through}
-.session-top{display:flex;justify-content:space-between;gap:12px} .done-label{display:flex;align-items:center;gap:8px;font-size:18px} .done{width:21px;height:21px}
-.tag{font-size:12px;font-weight:bold;color:var(--week)} .exercise{font-size:17px;line-height:1.45;margin:16px 0 8px}
-.total{background:#eef2ef;padding:9px;border-radius:9px;margin:0 0 7px} .note{font-size:12px;color:var(--muted);margin:0 0 14px}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px} label{display:grid;gap:5px;font-size:12px;color:var(--muted);margin-top:10px}
-input,select,textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--text);font:inherit}
-textarea{min-height:75px;resize:vertical} .actions{display:flex;gap:10px;flex-wrap:wrap;margin:25px 0}
-button{padding:11px 15px;border:0;border-radius:10px;background:var(--accent);color:white;cursor:pointer} button.secondary{background:#59655e}
-@media(max-width:800px){.cards{grid-template-columns:1fr}.summary{grid-template-columns:1fr}}
-@media(max-width:520px){.wrap{padding:10px}.grid{grid-template-columns:1fr}.name input{width:min(220px,75vw)}}
-</style>
-
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#77c8f2">
+<title>Courons Ensemble — Version 1.1</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Courons Ensemble">
-
+<style>
+:root{--bg:#eef8fd;--card:#fff;--text:#173042;--muted:#617888;--line:#cfe8f5;--accent:#55b8eb;--accent-dark:#247fae;--soft:#e3f5fd;--success:#20865d}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:linear-gradient(180deg,#e9f7fd 0,#f7fbfd 340px);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+.wrap{max-width:1120px;margin:auto;padding:18px}
+header{background:linear-gradient(135deg,#63c4ef,#91d8f6);color:#10354a;border-radius:24px;padding:25px;box-shadow:0 12px 32px #247fae24}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
+h1{margin:0 0 7px;font-size:clamp(30px,5vw,50px)}
+header p{margin:0;opacity:.82}
+.version{display:inline-block;margin-top:10px;padding:5px 9px;border-radius:999px;background:#ffffff8f;font-size:12px;font-weight:bold}
+.name{display:grid;gap:6px;font-size:13px;font-weight:bold}
+.name input{width:210px;padding:11px;border-radius:11px;border:1px solid #ffffffbb;background:#fff;color:var(--text)}
+.progress-text{display:flex;justify-content:space-between;margin-top:23px;font-weight:bold}
+.bar{height:14px;background:#ffffff91;border-radius:999px;overflow:hidden;margin-top:8px}
+.bar div{height:100%;width:0;background:var(--accent-dark);transition:width .3s}
+.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 5px 16px #247fae12}
+.box small{color:var(--muted);display:block}
+.box strong{font-size:26px}
+.week{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #247fae10}
+.week-header{width:100%;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:17px 19px;border:0;background:#fff;color:var(--text);text-align:left;cursor:pointer}
+.week-header span:first-child{display:flex;align-items:baseline;gap:10px}
+.week-header strong{font-size:22px}
+.week-header small{color:var(--muted)}
+.week-status{font-weight:bold;color:var(--accent-dark)}
+.chevron{font-size:24px;transition:transform .2s}
+.week.collapsed .chevron{transform:rotate(-90deg)}
+.week-body{padding:0 16px 16px}
+.week.collapsed .week-body{display:none}
+.week.complete .week-header{background:#e9f8f2}
+.week.complete .week-status{color:var(--success)}
+.week-note{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--soft);color:#225f7f;line-height:1.45}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.session{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:15px;padding:16px}
+.session.done-card{opacity:.72;background:#f2fbf7}
+.session.done-card .exercise{text-decoration:line-through}
+.session-top{display:flex;justify-content:space-between;gap:12px;align-items:center}
+.done-label{display:flex;align-items:center;gap:8px;font-size:18px;color:var(--text);margin:0}
+.done{width:21px;height:21px;accent-color:var(--accent-dark)}
+.tag,.advice-week{font-size:12px;font-weight:bold;color:var(--accent-dark)}
+.fast{display:inline-block;margin-top:12px;padding:5px 8px;border-radius:999px;background:#fff3cd;color:#8a6300;font-size:12px;font-weight:bold}
+.exercise{font-size:16px;line-height:1.5;margin:14px 0 8px}
+.sessiontime{margin:0 0 8px}
+.total{background:var(--soft);padding:10px;border-radius:10px;margin:0 0 10px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+label{display:grid;gap:5px;font-size:12px;color:var(--muted);margin-top:8px}
+input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:9px;background:white;color:var(--text);font:inherit}
+.coach{margin:28px 0}
+.section-title{margin-bottom:13px}
+.section-title h2{margin:0 0 5px;font-size:28px}
+.section-title p{margin:0;color:var(--muted)}
+.advice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.advice-card{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 5px 16px #247fae10}
+.advice-icon{font-size:30px;flex:0 0 auto}
+.advice-card h3{margin:4px 0 7px}
+.advice-card p{margin:0;line-height:1.5;color:#405968}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin:25px 0}
+button.action{padding:12px 16px;border:0;border-radius:11px;background:var(--accent-dark);color:white;cursor:pointer;font-weight:bold}
+button.secondary{background:#607987}
+.footer-note{font-size:12px;color:var(--muted);margin-bottom:22px}
+@media(max-width:800px){.cards,.advice-grid{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:560px){.wrap{padding:10px}.summary{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.name input{width:min(230px,78vw)}.week-header{grid-template-columns:1fr auto auto;padding:15px}}
+</style>
 </head>
 <body>
 <div class="wrap">
 <header>
- <div class="top">
-  <div><h1>Programme Courons Ensemble</h1><p>Les 16 séances sont toujours affichées ci-dessous.</p></div>
-  <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
- </div>
- <div class="progress-text"><span id="doneText">0 séance terminée sur 16</span><span id="percent">0 %</span></div>
- <div class="bar"><div id="bar"></div></div>
+  <div class="top">
+    <div>
+      <h1>Programme Courons Ensemble</h1>
+      <p>5 semaines · 20 séances · votre progression reste enregistrée sur cet appareil.</p>
+      <span class="version">Version 1.1</span>
+    </div>
+    <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
+  </div>
+  <div class="progress-text"><span id="doneText">0 séance terminée sur 20</span><span id="percent">0 %</span></div>
+  <div class="bar"><div id="bar"></div></div>
 </header>
 
 <div class="summary">
- <div class="box"><small>Séances affichées</small><strong>16 / 16</strong></div>
- <div class="box"><small>Terminées</small><strong id="doneCount">0</strong></div>
- <div class="box"><small>Restantes</small><strong id="leftCount">16</strong></div>
+  <div class="box"><small>Séances du programme</small><strong>20</strong></div>
+  <div class="box"><small>Terminées</small><strong id="doneCount">0</strong></div>
+  <div class="box"><small>Restantes</small><strong id="leftCount">20</strong></div>
 </div>
 
 
-    <section class="week">
-      <h2>Semaine 1 <span>4 séances</span></h2>
-      <div class="cards">
-        <article class="session" id="w1s1" data-id="w1s1" data-week="1" style="--week:#2d5a3d">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
-            <span class="tag">Semaine 1</span>
-          </div>
-          <p class="exercise">5 × (30 sec footing + 30 sec marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>5 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>12 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w1s2" data-id="w1s2" data-week="1" style="--week:#2d5a3d">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
-            <span class="tag">Semaine 1</span>
-          </div>
-          <p class="exercise">6 × (30 sec footing + 30 sec marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>6 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>13 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w1s3" data-id="w1s3" data-week="1" style="--week:#2d5a3d">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
-            <span class="tag">Semaine 1</span>
-          </div>
-          <p class="exercise">8 × (30 sec footing + 30 sec marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>8 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>15 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w1s4" data-id="w1s4" data-week="1" style="--week:#2d5a3d">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
-            <span class="tag">Semaine 1</span>
-          </div>
-          <p class="exercise">4 × (45 sec course + 1 min 15 marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>8 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>15 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article></div>
+    <section class="week" data-week="1">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 1</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span>
+        <span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="cards">
+    <article class="session" id="w1s1" data-id="w1s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 1</span>
+      </div>
+      
+      <p class="exercise">5 × (30 sec footing + 30 sec marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>5 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>12 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w1s2" data-id="w1s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 1</span>
+      </div>
+      
+      <p class="exercise">6 × (30 sec footing + 30 sec marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>6 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>13 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w1s3" data-id="w1s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 1</span>
+      </div>
+      
+      <p class="exercise">8 × (30 sec footing + 30 sec marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>8 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>15 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w1s4" data-id="w1s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 1</span>
+      </div>
+      
+      <p class="exercise">4 × (45 sec course + 1 min 15 marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>8 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>15 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
     </section>
-    <section class="week">
-      <h2>Semaine 2 <span>4 séances</span></h2>
-      <div class="cards">
-        <article class="session" id="w2s1" data-id="w2s1" data-week="2" style="--week:#2d3f6b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
-            <span class="tag">Semaine 2</span>
-          </div>
-          <p class="exercise">5 × (45 sec footing + 1 min 15 marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>10 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>17 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w2s2" data-id="w2s2" data-week="2" style="--week:#2d3f6b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
-            <span class="tag">Semaine 2</span>
-          </div>
-          <p class="exercise">5 × (45 sec footing + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>8 min 45 s</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>15 min 45 s</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w2s3" data-id="w2s3" data-week="2" style="--week:#2d3f6b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
-            <span class="tag">Semaine 2</span>
-          </div>
-          <p class="exercise">6 × (45 sec footing + 45 sec marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>9 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>16 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w2s4" data-id="w2s4" data-week="2" style="--week:#2d3f6b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
-            <span class="tag">Semaine 2</span>
-          </div>
-          <p class="exercise">5 × (1 min footing + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>10 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>17 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article></div>
+    <section class="week" data-week="2">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 2</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span>
+        <span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="cards">
+    <article class="session" id="w2s1" data-id="w2s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 2</span>
+      </div>
+      
+      <p class="exercise">5 × (45 sec footing + 1 min 15 marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>10 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>17 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w2s2" data-id="w2s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 2</span>
+      </div>
+      
+      <p class="exercise">5 × (45 sec footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>8 min 45 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>15 min 45 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w2s3" data-id="w2s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 2</span>
+      </div>
+      
+      <p class="exercise">6 × (45 sec footing + 45 sec marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>9 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>16 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w2s4" data-id="w2s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 2</span>
+      </div>
+      
+      <p class="exercise">5 × (1 min footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>10 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>17 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
     </section>
-    <section class="week">
-      <h2>Semaine 3 <span>4 séances</span></h2>
-      <div class="cards">
-        <article class="session" id="w3s1" data-id="w3s1" data-week="3" style="--week:#8a6555">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
-            <span class="tag">Semaine 3</span>
-          </div>
-          <p class="exercise">5 × (1 min course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>10 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>17 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w3s2" data-id="w3s2" data-week="3" style="--week:#8a6555">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
-            <span class="tag">Semaine 3</span>
-          </div>
-          <p class="exercise">5 × (1 min 15 course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>11 min 15 s</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>18 min 15 s</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w3s3" data-id="w3s3" data-week="3" style="--week:#8a6555">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
-            <span class="tag">Semaine 3</span>
-          </div>
-          <p class="exercise">5 × (1 min 30 course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>12 min 30 s</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>19 min 30 s</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w3s4" data-id="w3s4" data-week="3" style="--week:#8a6555">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
-            <span class="tag">Semaine 3</span>
-          </div>
-          <p class="exercise">6 × (1 min 30 course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>15 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>22 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article></div>
+    <section class="week" data-week="3">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 3</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span>
+        <span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="cards">
+    <article class="session" id="w3s1" data-id="w3s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 3</span>
+      </div>
+      
+      <p class="exercise">5 × (1 min course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>10 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>17 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w3s2" data-id="w3s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 3</span>
+      </div>
+      
+      <p class="exercise">5 × (1 min 15 course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>11 min 15 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>18 min 15 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w3s3" data-id="w3s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 3</span>
+      </div>
+      
+      <p class="exercise">5 × (1 min 30 course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>12 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>19 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w3s4" data-id="w3s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 3</span>
+      </div>
+      
+      <p class="exercise">6 × (1 min 30 course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>15 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>22 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
     </section>
-    <section class="week">
-      <h2>Semaine 4 <span>4 séances</span></h2>
-      <div class="cards">
-        <article class="session" id="w4s1" data-id="w4s1" data-week="4" style="--week:#b5532b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
-            <span class="tag">Semaine 4</span>
-          </div>
-          <p class="exercise">2 × (2 min course + 1 min marche), puis 4 × (1 min 30 course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>16 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>23 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w4s2" data-id="w4s2" data-week="4" style="--week:#b5532b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
-            <span class="tag">Semaine 4</span>
-          </div>
-          <p class="exercise">3 × (2 min course + 1 min marche), puis 3 × (1 min 30 course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>16 min 30 s</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>23 min 30 s</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w4s3" data-id="w4s3" data-week="4" style="--week:#b5532b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
-            <span class="tag">Semaine 4</span>
-          </div>
-          <p class="exercise">4 × (2 min course + 1 min marche), puis 2 × (1 min 30 course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>17 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>24 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article>
-        <article class="session" id="w4s4" data-id="w4s4" data-week="4" style="--week:#b5532b">
-          <div class="session-top">
-            <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
-            <span class="tag">Semaine 4</span>
-          </div>
-          <p class="exercise">6 × (2 min course + 1 min marche)</p>
-          <p class="sessiontime">🏃 Temps de la séance : <strong>18 min</strong></p>
-          <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>25 min</strong></p>
-          <label>Date<input class="date" type="date"></label>
-          <label>Ressenti
-            <select class="feeling">
-              <option value="">Non renseigné</option>
-              <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
-            </select>
-          </label>
-          
-        </article></div>
+    <section class="week" data-week="4">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 4</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span>
+        <span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="cards">
+    <article class="session" id="w4s1" data-id="w4s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 4</span>
+      </div>
+      
+      <p class="exercise">2 × (2 min course + 1 min marche), puis 4 × (1 min 30 course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>16 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>23 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w4s2" data-id="w4s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 4</span>
+      </div>
+      
+      <p class="exercise">3 × (2 min course + 1 min marche), puis 3 × (1 min 30 course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>16 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>23 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w4s3" data-id="w4s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 4</span>
+      </div>
+      
+      <p class="exercise">4 × (2 min course + 1 min marche), puis 2 × (1 min 30 course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>17 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>24 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w4s4" data-id="w4s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 4</span>
+      </div>
+      
+      <p class="exercise">6 × (2 min course + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>18 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>25 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
     </section>
+    <section class="week" data-week="5">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 5</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span>
+        <span class="chevron">⌄</span>
+      </button>
+      <div class="week-body">
+        <div class="week-note">
+          <strong>Nouveauté :</strong> à partir de la séance 3, découvrez le footing rapide :
+          une allure un peu plus soutenue que votre footing habituel, mais bien en dessous du sprint.
+        </div><div class="cards">
+    <article class="session" id="w5s1" data-id="w5s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 5</span>
+      </div>
+      
+      <p class="exercise">4 × (1 min footing + 1 min marche), puis 3 × (2 min course + 1 min marche), puis 1 × (1 min footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>19 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>26 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w5s2" data-id="w5s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 5</span>
+      </div>
+      
+      <p class="exercise">3 × (1 min footing + 1 min marche), puis 4 × (2 min footing + 1 min marche), puis 1 × (1 min footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>20 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>27 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w5s3" data-id="w5s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 5</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">1 × (1 min footing + 1 min marche), puis 5 × (2 min footing + 1 min marche), puis 2 × (15 sec footing rapide + 45 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>19 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>26 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w5s4" data-id="w5s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 5</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">3 × (2 min footing + 1 min marche), puis 2 × (15 sec footing rapide + 45 sec footing + 30 sec marche), puis 3 × (2 min footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>21 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>28 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
+    </section>
+
+<section class="coach">
+  <div class="section-title">
+    <h2>Conseils du coach</h2>
+    <p>Des fiches pratiques inspirées des « points du jour » du programme.</p>
+  </div>
+  <div class="advice-grid"><article class="advice-card">
+      <div class="advice-icon">👟</div>
+      <div><span class="advice-week">Semaine 1</span><h3>La bonne technique</h3><p>Faites des pas courts et fréquents, gardez le genou légèrement fléchi et posez le pied sous votre centre de gravité. Une foulée silencieuse est un bon repère.</p></div>
+    </article><article class="advice-card">
+      <div class="advice-icon">☀️</div>
+      <div><span class="advice-week">Semaine 2</span><h3>Courir par temps chaud</h3><p>Privilégiez le matin ou la fin de journée, recherchez l’ombre, réduisez l’intensité et utilisez le test de la parole. Hydratez-vous régulièrement et arrêtez-vous si vous ressentez des signes inhabituels.</p></div>
+    </article><article class="advice-card">
+      <div class="advice-icon">👟</div>
+      <div><span class="advice-week">Semaine 3</span><h3>Bien choisir ses baskets</h3><p>Choisissez surtout une chaussure confortable, légère et adaptée à votre pied. Testez-la en magasin et changez de modèle progressivement afin de laisser aux muscles et aux tendons le temps de s’adapter.</p></div>
+    </article><article class="advice-card">
+      <div class="advice-icon">🦴</div>
+      <div><span class="advice-week">Semaine 4</span><h3>Arthrose et course à pied</h3><p>Une activité adaptée et progressive peut aider à entretenir la mobilité et la fonction articulaire. Respectez les douleurs, alternez course et marche et demandez un avis médical en cas de douleur persistante.</p></div>
+    </article><article class="advice-card">
+      <div class="advice-icon">🍌</div>
+      <div><span class="advice-week">Semaine 5</span><h3>Alimentation et hydratation</h3><p>Évitez de partir le ventre vide ou juste après un repas copieux. Pour ces séances courtes, l’eau suffit généralement. Après l’effort, pensez à boire et à prendre une collation simple associant glucides et protéines.</p></div>
+    </article></div>
+</section>
 
 <div class="actions">
- <button id="export">Exporter mes données</button>
- <button class="secondary" id="reset">Réinitialiser</button>
+  <button class="action" id="export">Exporter mes données</button>
+  <button class="action secondary" id="reset">Réinitialiser</button>
 </div>
+<p class="footer-note">Les informations de suivi restent enregistrées uniquement dans le navigateur de chaque utilisateur.</p>
 </div>
+
 <script>
 (function(){
   var KEY="Programme_Courons_Ensemble_v4";
   var nameKey=KEY+"_prenom";
+  var TOTAL=20;
   var fields=["done","date","feeling"];
   var saved={};
   try{saved=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){saved={};}
+
   var firstname=document.getElementById("firstname");
   firstname.value=localStorage.getItem(nameKey)||"";
   firstname.addEventListener("input",function(){localStorage.setItem(nameKey,firstname.value);});
@@ -368,13 +572,40 @@ button{padding:11px 15px;border:0;border-radius:10px;background:var(--accent);co
       card.classList.toggle("done-card",checked);
       if(checked) done++;
     });
+
+    document.querySelectorAll(".week").forEach(function(week){
+      var boxes=Array.from(week.querySelectorAll(".done"));
+      var weekDone=boxes.filter(function(el){return el.checked;}).length;
+      var complete=weekDone===boxes.length;
+      week.classList.toggle("complete",complete);
+      week.querySelector(".week-status").textContent=complete ? "✓ Terminée" : weekDone+" / "+boxes.length;
+
+      if(complete && !week.dataset.autoFolded){
+        week.classList.add("collapsed");
+        week.querySelector(".week-header").setAttribute("aria-expanded","false");
+        week.dataset.autoFolded="1";
+      }
+      if(!complete){
+        delete week.dataset.autoFolded;
+      }
+    });
+
     document.getElementById("doneCount").textContent=done;
-    document.getElementById("leftCount").textContent=16-done;
-    document.getElementById("doneText").textContent=done+" séance"+(done>1?"s":"")+" terminée"+(done>1?"s":"")+" sur 16";
-    var pct=Math.round(done/16*100);
+    document.getElementById("leftCount").textContent=TOTAL-done;
+    document.getElementById("doneText").textContent=done+" séance"+(done>1?"s":"")+" terminée"+(done>1?"s":"")+" sur "+TOTAL;
+    var pct=Math.round(done/TOTAL*100);
     document.getElementById("percent").textContent=pct+" %";
     document.getElementById("bar").style.width=pct+"%";
   }
+
+  document.querySelectorAll(".week-header").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      var week=btn.closest(".week");
+      var collapsed=week.classList.toggle("collapsed");
+      btn.setAttribute("aria-expanded",collapsed?"false":"true");
+      week.dataset.autoFolded="1";
+    });
+  });
 
   document.querySelectorAll(".session").forEach(function(card){
     var id=card.getAttribute("data-id");
@@ -383,7 +614,8 @@ button{padding:11px 15px;border:0;border-radius:10px;background:var(--accent);co
       var el=card.querySelector("."+cls);
       if(cls==="done") el.checked=!!data[cls];
       else if(data[cls]!==undefined) el.value=data[cls];
-      el.addEventListener(cls==="comment"?"input":"change",function(){
+
+      el.addEventListener("change",function(){
         saved[id]=saved[id]||{};
         saved[id][cls]=cls==="done"?el.checked:el.value;
         if(cls==="done" && el.checked && !card.querySelector(".date").value){
@@ -396,10 +628,11 @@ button{padding:11px 15px;border:0;border-radius:10px;background:var(--accent);co
       });
     });
   });
+
   update();
 
   document.getElementById("export").addEventListener("click",function(){
-    var payload={prenom:firstname.value,progression:saved};
+    var payload={version:"1.1",prenom:firstname.value,progression:saved};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
     var a=document.createElement("a");
     a.href=URL.createObjectURL(blob);
@@ -416,7 +649,6 @@ button{padding:11px 15px;border:0;border-radius:10px;background:var(--accent);co
   });
 })();
 </script>
-
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
@@ -424,6 +656,5 @@ if ("serviceWorker" in navigator) {
   });
 }
 </script>
-
 </body>
 </html>
