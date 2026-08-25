@@ -1,12 +1,12 @@
 {
   "name": "Programme Courons Ensemble",
   "short_name": "Courons Ensemble",
-  "description": "Programme de course à pied sur 5 semaines avec suivi personnel et conseils du coach.",
+  "description": "Programme Courons Ensemble sur 8 semaines avec suivi personnel et conseils du coach.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#eef8fd",
-  "theme_color": "#77c8f2",
+  "background_color": "#fff5f8",
+  "theme_color": "#f3b9ca",
   "icons": [
     {
       "src": "./icons/icon-192.png",

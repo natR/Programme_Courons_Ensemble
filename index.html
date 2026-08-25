@@ -4,19 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#77c8f2">
-<title>Courons Ensemble — Version 1.1.1</title>
+<title>Courons Ensemble — Version 1.2</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="Courons Ensemble">
 <style>
-:root{--bg:#eef8fd;--card:#fff;--text:#173042;--muted:#617888;--line:#cfe8f5;--accent:#55b8eb;--accent-dark:#247fae;--soft:#e3f5fd;--success:#20865d}
+:root{--bg:#fff5f8;--card:#fff;--text:#49323b;--muted:#826b74;--line:#f0d4de;--accent:#e9a9bd;--accent-dark:#b75f7d;--soft:#fdebf1;--success:#7b8f6a}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;background:linear-gradient(180deg,#e9f7fd 0,#f7fbfd 340px);color:var(--text);font-family:Arial,Helvetica,sans-serif}
+body{margin:0;background:linear-gradient(180deg,#fff0f5 0,#fffafb 340px);color:var(--text);font-family:Arial,Helvetica,sans-serif}
 .wrap{max-width:1120px;margin:auto;padding:18px}
-header{background:linear-gradient(135deg,#63c4ef,#91d8f6);color:#10354a;border-radius:24px;padding:25px;box-shadow:0 12px 32px #247fae24}
+header{background:linear-gradient(135deg,#f3b9ca,#f8d4df);color:#4b3040;border-radius:24px;padding:25px;box-shadow:0 12px 32px #b75f7d24}
 .top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;flex-wrap:wrap}
 h1{margin:0 0 7px;font-size:clamp(30px,5vw,50px)}
 header p{margin:0;opacity:.82}
@@ -27,10 +27,10 @@ header p{margin:0;opacity:.82}
 .bar{height:14px;background:#ffffff91;border-radius:999px;overflow:hidden;margin-top:8px}
 .bar div{height:100%;width:0;background:var(--accent-dark);transition:width .3s}
 .summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
-.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 5px 16px #247fae12}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 5px 16px #b75f7d12}
 .box small{color:var(--muted);display:block}
 .box strong{font-size:26px}
-.week{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #247fae10}
+.week{margin:16px 0;background:#fff;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 5px 18px #b75f7d10}
 .week-header{width:100%;display:grid;grid-template-columns:1fr auto auto;align-items:center;gap:14px;padding:17px 19px;border:0;background:#fff;color:var(--text);text-align:left;cursor:pointer}
 .week-header span:first-child{display:flex;align-items:baseline;gap:10px}
 .week-header strong{font-size:22px}
@@ -42,7 +42,7 @@ header p{margin:0;opacity:.82}
 .week.collapsed .week-body{display:none}
 .week.complete .week-header{background:#e9f8f2}
 .week.complete .week-status{color:var(--success)}
-.week-note{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--soft);color:#225f7f;line-height:1.45}
+.week-note{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:var(--soft);color:#7d4258;line-height:1.45}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 .session{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:15px;padding:16px}
 .session.done-card{opacity:.72;background:#f2fbf7}
@@ -63,7 +63,7 @@ input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:
 .section-title h2{margin:0 0 5px;font-size:28px}
 .section-title p{margin:0;color:var(--muted)}
 .advice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.advice-card{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 5px 16px #247fae10}
+.advice-card{display:flex;gap:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:0 5px 16px #b75f7d10}
 .advice-icon{font-size:30px;flex:0 0 auto}
 .advice-card h3{margin:4px 0 7px}
 .advice-card p{margin:0;line-height:1.5;color:#405968}
@@ -71,6 +71,17 @@ input,select{width:100%;padding:10px;border:1px solid var(--line);border-radius:
 button.action{padding:12px 16px;border:0;border-radius:11px;background:var(--accent-dark);color:white;cursor:pointer;font-weight:bold}
 button.secondary{background:#607987}
 .footer-note{font-size:12px;color:var(--muted);margin-bottom:22px}
+
+
+.coach-list{display:grid;gap:12px}
+.coach-detail{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 5px 16px #b75f7d10}
+.coach-detail summary{cursor:pointer;list-style:none;padding:17px 18px;font-weight:bold;font-size:16px;color:#6f3d50;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.coach-detail summary::-webkit-details-marker{display:none}
+.coach-detail summary::after{content:"＋";font-size:20px;color:var(--accent-dark)}
+.coach-detail[open] summary::after{content:"−"}
+.coach-detail[open] summary{background:var(--soft)}
+.coach-detail div{padding:4px 18px 17px;line-height:1.6;color:#5d4650}
+.coach-detail p{margin:12px 0 0}
 
 .top-menu{
   display:flex;
@@ -88,7 +99,7 @@ button.secondary{background:#607987}
   padding:11px 16px;
   border-radius:12px;
   background:#ffffffa8;
-  color:#174c68;
+  color:#744054;
   font-weight:bold;
   text-decoration:none;
   transition:transform .15s,background .15s,box-shadow .15s;
@@ -96,10 +107,10 @@ button.secondary{background:#607987}
 .menu-link:hover,.menu-link:focus{
   background:#fff;
   transform:translateY(-1px);
-  box-shadow:0 6px 16px #247fae28;
+  box-shadow:0 6px 16px #b75f7d28;
 }
 .menu-link.active{
-  background:#176f9e;
+  background:#b75f7d;
   color:#fff;
 }
 #programme,#conseils{
@@ -117,7 +128,7 @@ button.secondary{background:#607987}
   color:#fff;
   font-size:24px;
   font-weight:bold;
-  box-shadow:0 8px 22px #163f5560;
+  box-shadow:0 8px 22px #7d425860;
   cursor:pointer;
   opacity:0;
   pointer-events:none;
@@ -141,8 +152,8 @@ button.secondary{background:#607987}
   <div class="top">
     <div>
       <h1>Programme Courons Ensemble</h1>
-      <p>5 semaines · 20 séances · votre progression reste enregistrée sur cet appareil.</p>
-      <span class="version">Version 1.1.1</span>
+      <p>8 semaines · 32 séances · votre progression reste enregistrée sur cet appareil.</p>
+      <span class="version">Version 1.2</span>
     </div>
     <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
   </div>
@@ -158,9 +169,9 @@ button.secondary{background:#607987}
 
 <main id="programme">
 <div class="summary">
-  <div class="box"><small>Séances du programme</small><strong>20</strong></div>
+  <div class="box"><small>Séances du programme</small><strong>32</strong></div>
   <div class="box"><small>Terminées</small><strong id="doneCount">0</strong></div>
-  <div class="box"><small>Restantes</small><strong id="leftCount">20</strong></div>
+  <div class="box"><small>Restantes</small><strong id="leftCount">32</strong></div>
 </div>
 
 
@@ -589,42 +600,291 @@ button.secondary{background:#607987}
     </article></div></div>
     </section>
 
+
+    <section class="week" data-week="6">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 6</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span><span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="cards">
+    <article class="session" id="w6s1" data-id="w6s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 6</span>
+      </div>
+      
+      <p class="exercise">2 × (2 min footing + 1 min marche), puis 2 × (3 min footing + 1 min 30 marche), puis 2 × (2 min footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>21 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>28 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w6s2" data-id="w6s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 6</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">4 × (3 min footing + 1 min 30 marche), puis 2 × (15 sec footing rapide + 45 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>20 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>27 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w6s3" data-id="w6s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 6</span>
+      </div>
+      <span class="fast">🌿 Récupération</span>
+      <p class="exercise">3 × (3 min footing + 1 min 30 marche), puis 3 × (2 min footing + 1 min marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>22 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>29 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w6s4" data-id="w6s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 6</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">5 × (3 min footing + 1 min 30 marche), puis 2 × (15 sec footing rapide + 45 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>24 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>31 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
+    </section>
+
+    <section class="week" data-week="7">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 7</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span><span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="week-note"><strong>Semaine 7 créée pour assurer la transition :</strong>
+        les blocs passent progressivement de 3 à 5 minutes avant l'introduction des blocs de 7 minutes en semaine 8.</div><div class="cards">
+    <article class="session" id="w7s1" data-id="w7s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 7</span>
+      </div>
+      
+      <p class="exercise">4 × (4 min footing + 1 min 30 marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>22 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>29 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w7s2" data-id="w7s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 7</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">3 × (4 min footing + 1 min 30 marche), puis 3 × (20 sec footing rapide + 40 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>19 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>26 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w7s3" data-id="w7s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 7</span>
+      </div>
+      <span class="fast">🌿 Récupération</span>
+      <p class="exercise">3 × (5 min footing + 1 min 30 marche), puis 1 × (3 min footing + 1 min 30 marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>24 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>31 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w7s4" data-id="w7s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 7</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">3 × (5 min footing + 1 min 30 marche), puis 3 × (20 sec footing rapide + 40 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>22 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>29 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
+    </section>
+
+    <section class="week" data-week="8">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 8</strong><small>4 séances</small></span>
+        <span class="week-status">0 / 4</span><span class="chevron">⌄</span>
+      </button>
+      <div class="week-body"><div class="cards">
+    <article class="session" id="w8s1" data-id="w8s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 8</span>
+      </div>
+      
+      <p class="exercise">2 × (5 min footing + 1 min 30 marche), puis 1 × (7 min footing + 2 min marche), puis 1 × (5 min footing + 1 min 30 marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>28 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>35 min 30 s</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w8s2" data-id="w8s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 8</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">3 × (7 min footing + 2 min marche), puis 3 × (25 sec footing rapide + 35 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>30 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>37 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w8s3" data-id="w8s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 8</span>
+      </div>
+      <span class="fast">🌿 Récupération</span>
+      <p class="exercise">2 × (7 min footing + 2 min marche), puis 2 × (5 min footing + 1 min 30 marche)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>31 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>38 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article>
+    <article class="session" id="w8s4" data-id="w8s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 8</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">3 × (7 min footing + 2 min marche), puis 1 × (5 min footing + 2 min marche), puis 3 × (25 sec footing rapide + 35 sec footing)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>37 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>44 min</strong></p>
+      <div class="fields">
+        <label>Date<input class="date" type="date"></label>
+        <label>Ressenti
+          <select class="feeling">
+            <option value="">Non renseigné</option>
+            <option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option>
+          </select>
+        </label>
+      </div>
+    </article></div></div>
+    </section>
 </main>
 <section class="coach" id="conseils">
   <div class="section-title">
     <h2>Conseils du coach</h2>
-    <p>Des fiches pratiques inspirées des « points du jour » du programme.</p>
+    <p>Touchez un titre pour ouvrir la fiche détaillée.</p>
   </div>
-  <div class="advice-grid"><article class="advice-card">
-      <div class="advice-icon">👟</div>
-      <div><span class="advice-week">Semaine 1</span><h3>La bonne technique</h3><p>Faites des pas courts et fréquents, gardez le genou légèrement fléchi et posez le pied sous votre centre de gravité. Une foulée silencieuse est un bon repère.</p></div>
-    </article><article class="advice-card">
-      <div class="advice-icon">☀️</div>
-      <div><span class="advice-week">Semaine 2</span><h3>Courir par temps chaud</h3><p>Privilégiez le matin ou la fin de journée, recherchez l’ombre, réduisez l’intensité et utilisez le test de la parole. Hydratez-vous régulièrement et arrêtez-vous si vous ressentez des signes inhabituels.</p></div>
-    </article><article class="advice-card">
-      <div class="advice-icon">👟</div>
-      <div><span class="advice-week">Semaine 3</span><h3>Bien choisir ses baskets</h3><p>Choisissez surtout une chaussure confortable, légère et adaptée à votre pied. Testez-la en magasin et changez de modèle progressivement afin de laisser aux muscles et aux tendons le temps de s’adapter.</p></div>
-    </article><article class="advice-card">
-      <div class="advice-icon">🦴</div>
-      <div><span class="advice-week">Semaine 4</span><h3>Arthrose et course à pied</h3><p>Une activité adaptée et progressive peut aider à entretenir la mobilité et la fonction articulaire. Respectez les douleurs, alternez course et marche et demandez un avis médical en cas de douleur persistante.</p></div>
-    </article><article class="advice-card">
-      <div class="advice-icon">🍌</div>
-      <div><span class="advice-week">Semaine 5</span><h3>Alimentation et hydratation</h3><p>Évitez de partir le ventre vide ou juste après un repas copieux. Pour ces séances courtes, l’eau suffit généralement. Après l’effort, pensez à boire et à prendre une collation simple associant glucides et protéines.</p></div>
-    </article></div>
+  <div class="coach-list">
+    <details class="coach-detail"><summary>🏃 Technique de course : une foulée simple et économique</summary><div><p>Gardez une posture haute mais détendue, le regard loin devant et les épaules relâchées. Cherchez des pas plutôt courts et réguliers, avec le pied qui se pose près du centre de gravité plutôt que très loin devant.</p><p>Ne cherchez pas à transformer brutalement votre façon de courir. Une modification de foulée doit être progressive. Le meilleur repère reste une course fluide, silencieuse et sans tension inutile.</p></div></details>
+    <details class="coach-detail"><summary>☀️ Courir lorsqu’il fait chaud</summary><div><p>Privilégiez les heures fraîches, ralentissez l’allure et choisissez un parcours ombragé. La chaleur augmente l’effort cardiovasculaire : une allure habituellement facile peut donc sembler nettement plus difficile.</p><p>Hydratez-vous régulièrement dans la journée. Si vous ressentez vertiges, frissons inhabituels, nausées, confusion ou faiblesse marquée, arrêtez l’effort et mettez-vous au frais.</p></div></details>
+    <details class="coach-detail"><summary>👟 Bien choisir ses chaussures de course</summary><div><p>La priorité est le confort immédiat. Une chaussure n’a pas besoin d’être très rigide ou très corrective pour être adaptée. Essayez plusieurs modèles, marchez puis trottinez avec et gardez celui dans lequel votre pied se sent naturellement bien.</p><p>Lors d’un changement de modèle, augmentez progressivement le temps d’utilisation afin de laisser aux muscles du pied, de la cheville et du mollet le temps de s’adapter.</p></div></details>
+    <details class="coach-detail"><summary>🦴 Articulations, arthrose et course</summary><div><p>Une pratique progressive et adaptée peut participer au maintien de la mobilité et de la capacité physique. L’objectif n’est pas de courir malgré une douleur importante mais d’ajuster la charge à ce que le corps tolère.</p><p>Une douleur articulaire vive, croissante, qui modifie la foulée ou qui persiste doit conduire à réduire la charge et, si elle continue, à demander l’avis d’un professionnel de santé.</p></div></details>
+    <details class="coach-detail"><summary>🍌 Alimentation et hydratation</summary><div><p>Pour une séance courte, une alimentation quotidienne équilibrée et de l’eau suffisent généralement. Évitez toutefois de partir juste après un repas copieux. Si vous avez faim avant de courir, une petite collation facile à digérer peut convenir.</p><p>Après la séance, buvez selon votre soif et reprenez une alimentation normale. Une collation contenant glucides et protéines peut être utile si le prochain repas est éloigné.</p></div></details>
+    <details class="coach-detail"><summary>🦶 Semelles orthopédiques : quand sont-elles utiles ?</summary><div><p>Les semelles peuvent être pertinentes lorsqu’un problème précis est identifié et qu’un professionnel les recommande. En revanche, elles ne doivent pas être considérées comme obligatoires pour tous les coureurs sans douleur.</p><p>En cas de douleur persistante au pied, au talon, à la cheville ou au genou, une évaluation dynamique par un professionnel peut aider à déterminer si une correction est réellement utile. La semaine 6 insiste aussi sur le renforcement et la progression douce.</p></div></details>
+    <details class="coach-detail"><summary>🌿 Récupération : pourquoi une séance facile compte vraiment</summary><div><p>Une séance de récupération n’est pas une séance “ratée”. Elle permet de maintenir l’habitude et le mouvement tout en limitant la fatigue. Gardez une allure où la respiration reste confortable.</p><p>Si la fatigue est inhabituelle, si les courbatures persistent ou si une douleur articulaire apparaît, mieux vaut alléger, marcher ou reporter la séance que forcer pour respecter le calendrier.</p></div></details>
+    <details class="coach-detail"><summary>🔍 Douleurs normales ou signaux d’alerte ?</summary><div><p>Des courbatures musculaires différées et une légère fatigue des jambes peuvent accompagner la progression. En revanche, une douleur articulaire aiguë, une douleur qui vous fait boiter, ou une douleur localisée qui persiste ou revient au même endroit mérite de la prudence.</p><p>En cas de doute, remplacez temporairement la course par de la marche active. Si la douleur persiste, s’aggrave ou s’accompagne de symptômes inquiétants, demandez un avis médical plutôt que d’essayer de courir à travers la douleur.</p></div></details>
+  </div>
 </section>
 
 <div class="actions">
-  <button class="action" id="export">Exporter mes données</button>
+  <button class="action" id="export">Sauvegarder ma progression</button>
+  <button class="action" id="importBtn">Restaurer une sauvegarde</button>
+  <input id="importFile" type="file" accept="application/json" hidden>
   <button class="action secondary" id="reset">Réinitialiser</button>
 </div>
-<p class="footer-note">Les informations de suivi restent enregistrées uniquement dans le navigateur de chaque utilisateur.</p>
+<p class="footer-note">La progression est enregistrée sur cet appareil. Avant de désinstaller l’application ou de changer de téléphone, utilisez « Sauvegarder ma progression », puis « Restaurer une sauvegarde » sur la nouvelle installation.</p>
 </div>
 
 <script>
 (function(){
   var KEY="Programme_Courons_Ensemble_v4";
   var nameKey=KEY+"_prenom";
-  var TOTAL=20;
+  var TOTAL=32;
   var fields=["done","date","feeling"];
   var saved={};
   try{saved=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){saved={};}
@@ -700,13 +960,36 @@ button.secondary{background:#607987}
   update();
 
   document.getElementById("export").addEventListener("click",function(){
-    var payload={version:"1.1.1",prenom:firstname.value,progression:saved};
+    var payload={version:"1.2",prenom:firstname.value,progression:saved};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
     var a=document.createElement("a");
     a.href=URL.createObjectURL(blob);
     a.download="sauvegarde_Programme_Courons_Ensemble.json";
     a.click();
     setTimeout(function(){URL.revokeObjectURL(a.href);},500);
+  });
+
+
+  document.getElementById("importBtn").addEventListener("click",function(){
+    document.getElementById("importFile").click();
+  });
+  document.getElementById("importFile").addEventListener("change",function(ev){
+    var file=ev.target.files && ev.target.files[0];
+    if(!file) return;
+    var reader=new FileReader();
+    reader.onload=function(){
+      try{
+        var payload=JSON.parse(reader.result);
+        if(!payload || typeof payload.progression!=="object") throw new Error("format");
+        localStorage.setItem(KEY,JSON.stringify(payload.progression));
+        if(payload.prenom) localStorage.setItem(nameKey,payload.prenom);
+        alert("Sauvegarde restaurée. L’application va se recharger.");
+        location.reload();
+      }catch(e){
+        alert("Ce fichier de sauvegarde n’est pas valide.");
+      }
+    };
+    reader.readAsText(file);
   });
 
   document.getElementById("reset").addEventListener("click",function(){
