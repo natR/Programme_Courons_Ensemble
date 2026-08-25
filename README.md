@@ -1,4 +1,4 @@
-# Programme Courons Ensemble — Version 1.2.2
+# Programme Courons Ensemble — Version 1.2.3
 
 - 8 semaines / 32 séances.
 - Semaines 6 et 8 intégrées depuis les programmes fournis.
@@ -16,3 +16,11 @@ Important : un site GitHub Pages seul ne peut pas garantir la conservation des d
 
 - Ajout d’un guide visuel « Marche / Footing / Footing rapide ».
 - Mise en évidence des allures directement dans les séances.
+
+- Nouveau système de mise à jour PWA.
+- Vérification du service worker à chaque lancement.
+- Bandeau « Nouvelle version disponible » avec bouton « Mettre à jour ».
+- Activation immédiate après validation, puis rechargement automatique.
+- Suppression des anciens caches lors de l'activation.
+- Navigation en stratégie network-first pour limiter l'affichage d'une ancienne version.
+- La clé localStorage de progression n'est pas modifiée.

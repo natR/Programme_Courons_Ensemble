@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#77c8f2">
-<title>Courons Ensemble — Version 1.2.2</title>
+<title>Courons Ensemble — Version 1.2.3</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -82,6 +82,19 @@ button.secondary{background:#607987}
 .model span{font-size:13px;color:var(--muted);line-height:1.4}
 @media(max-width:560px){.model-grid{grid-template-columns:1fr}}
 
+
+
+.update-banner{
+  position:fixed;left:12px;right:12px;bottom:14px;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  max-width:720px;margin:auto;padding:13px 14px;border-radius:16px;
+  background:#fff;border:1px solid var(--line);box-shadow:0 10px 30px #6b344b35;
+}
+.update-banner[hidden]{display:none}
+.update-banner div{display:grid;gap:2px}
+.update-banner strong{color:#6f3d50}
+.update-banner span{font-size:12px;color:var(--muted)}
+.update-banner button{border:0;border-radius:11px;padding:10px 13px;background:var(--accent-dark);color:#fff;font-weight:700;cursor:pointer}
 
 .pace-guide{background:#fff;border:1px solid var(--line);border-radius:18px;padding:18px;margin:0 0 18px;box-shadow:0 6px 18px #b75f7d12}
 .pace-guide h2{margin:0;color:#6f3d50;font-size:20px}
@@ -177,7 +190,7 @@ button.secondary{background:#607987}
     <div>
       <h1>Programme Courons Ensemble</h1>
       <p>8 semaines · 32 séances · votre progression reste enregistrée sur cet appareil.</p>
-      <span class="version">Version 1.2.2</span>
+      <span class="version">Version 1.2.3</span>
     </div>
     <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
   </div>
@@ -1053,7 +1066,7 @@ button.secondary{background:#607987}
   update();
 
   document.getElementById("export").addEventListener("click",function(){
-    var payload={version:"1.2.2",prenom:firstname.value,progression:saved};
+    var payload={version:"1.2.3",prenom:firstname.value,progression:saved};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
     var a=document.createElement("a");
     a.href=URL.createObjectURL(blob);
@@ -1133,13 +1146,59 @@ button.secondary{background:#607987}
 
 <script>
 if ("serviceWorker" in navigator) {
-  window.addEventListener("load", function () {
-    navigator.serviceWorker.register("./service-worker.js").catch(function () {});
+  window.addEventListener("load", async function () {
+    try {
+      const reg = await navigator.serviceWorker.register("./service-worker.js", {updateViaCache:"none"});
+      const banner = document.getElementById("updateBanner");
+      const apply = document.getElementById("applyUpdate");
+      let refreshing = false;
+
+      function showUpdate(worker) {
+        if (!worker) return;
+        banner.hidden = false;
+        apply.onclick = function () {
+          worker.postMessage({type:"SKIP_WAITING"});
+        };
+      }
+
+      if (reg.waiting) showUpdate(reg.waiting);
+
+      reg.addEventListener("updatefound", function () {
+        const worker = reg.installing;
+        if (!worker) return;
+        worker.addEventListener("statechange", function () {
+          if (worker.state === "installed" && navigator.serviceWorker.controller) {
+            showUpdate(worker);
+          }
+        });
+      });
+
+      navigator.serviceWorker.addEventListener("controllerchange", function () {
+        if (refreshing) return;
+        refreshing = true;
+        window.location.reload();
+      });
+
+      // Check GitHub for a newer service worker on each launch and periodically.
+      reg.update();
+      setInterval(function(){ reg.update(); }, 60 * 60 * 1000);
+    } catch (err) {
+      console.log("Mise à jour PWA indisponible", err);
+    }
   });
 }
 </script>
 
 <button id="backToTop" class="back-to-top" type="button" aria-label="Retour en haut">↑</button>
+
+
+<div id="updateBanner" class="update-banner" hidden>
+  <div>
+    <strong>Nouvelle version disponible</strong>
+    <span>Votre progression sera conservée.</span>
+  </div>
+  <button id="applyUpdate" type="button">Mettre à jour</button>
+</div>
 
 </body>
 </html>
