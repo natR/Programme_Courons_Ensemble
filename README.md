@@ -1,4 +1,4 @@
-# Programme Courons Ensemble — Version 1.2
+# Programme Courons Ensemble — Version 1.2.2
 
 - 8 semaines / 32 séances.
 - Semaines 6 et 8 intégrées depuis les programmes fournis.
@@ -10,3 +10,9 @@
 - Cache PWA versionné pour faciliter les mises à jour.
 
 Important : un site GitHub Pages seul ne peut pas garantir la conservation des données après suppression complète de l'application. Pour cela, il faudrait une sauvegarde distante avec compte utilisateur / base de données.
+
+- Harmonisation rose pâle des semaines terminées et séances cochées.
+- Fiches coach enrichies à partir des contenus des programmes, avec références de chaussures de la semaine 3.
+
+- Ajout d’un guide visuel « Marche / Footing / Footing rapide ».
+- Mise en évidence des allures directement dans les séances.
