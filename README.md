@@ -1,4 +1,4 @@
-# Programme Courons Ensemble — Version 1.2.3
+# Programme Courons Ensemble — Version 1.2.4
 
 - 8 semaines / 32 séances.
 - Semaines 6 et 8 intégrées depuis les programmes fournis.
@@ -24,3 +24,5 @@ Important : un site GitHub Pages seul ne peut pas garantir la conservation des d
 - Suppression des anciens caches lors de l'activation.
 - Navigation en stratégie network-first pour limiter l'affichage d'une ancienne version.
 - La clé localStorage de progression n'est pas modifiée.
+
+- Fond rose pâle harmonisé sur toutes les semaines 1 à 8.

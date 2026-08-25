@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#77c8f2">
-<title>Courons Ensemble — Version 1.2.3</title>
+<title>Courons Ensemble — Version 1.2.4</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -83,6 +83,13 @@ button.secondary{background:#607987}
 @media(max-width:560px){.model-grid{grid-template-columns:1fr}}
 
 
+
+
+/* v1.2.4 — harmonisation visuelle des 8 semaines */
+.week{background:#fdebf1 !important;border-color:#efcad7 !important}
+.week .week-header{background:#fdebf1 !important}
+.week .week-body{background:#fff7fa}
+.week.complete .week-header{background:#f8dce6 !important}
 
 .update-banner{
   position:fixed;left:12px;right:12px;bottom:14px;z-index:1000;
@@ -190,7 +197,7 @@ button.secondary{background:#607987}
     <div>
       <h1>Programme Courons Ensemble</h1>
       <p>8 semaines · 32 séances · votre progression reste enregistrée sur cet appareil.</p>
-      <span class="version">Version 1.2.3</span>
+      <span class="version">Version 1.2.4</span>
     </div>
     <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
   </div>
@@ -1066,7 +1073,7 @@ button.secondary{background:#607987}
   update();
 
   document.getElementById("export").addEventListener("click",function(){
-    var payload={version:"1.2.3",prenom:firstname.value,progression:saved};
+    var payload={version:"1.2.4",prenom:firstname.value,progression:saved};
     var blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json"});
     var a=document.createElement("a");
     a.href=URL.createObjectURL(blob);
