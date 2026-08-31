@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#77c8f2">
-<title>Courons Ensemble — Version 1.2.4</title>
+<meta name="theme-color" content="#efb778">
+<title>Courons Ensemble — Version 1.2.5</title>
 <link rel="manifest" href="./manifest.webmanifest">
 <link rel="apple-touch-icon" href="./icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -188,6 +188,46 @@ button.secondary{background:#607987}
 
 @media(max-width:800px){.cards,.advice-grid{grid-template-columns:1fr}.summary{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:560px){.top-menu{display:grid;grid-template-columns:1fr 1fr}.menu-link{padding:10px 8px;font-size:13px}.wrap{padding:10px}.summary{grid-template-columns:1fr}.fields{grid-template-columns:1fr}.name input{width:min(230px,78vw)}.week-header{grid-template-columns:1fr auto auto;padding:15px}}
+
+/* v1.2.5 — thème orange pâle */
+:root{
+  --bg:#fff8ef;--card:#fffdf9;--text:#513a2d;--muted:#806b5d;
+  --line:#efd9c4;--accent:#efb778;--accent-dark:#b86a2d;
+  --soft:#fff0dc;--success:#9b7a52
+}
+body{background:linear-gradient(180deg,#fff0db 0,#fffaf4 340px)}
+header{background:linear-gradient(135deg,#f5bf82,#f9d8ad);color:#513a2d;box-shadow:0 12px 32px #b86a2d24}
+.box,.week,.session,.advice-card,.coach-detail,.pace-guide{box-shadow:0 5px 18px #b86a2d12}
+.week{background:#ffeed9 !important;border-color:#efd1ae !important}
+.week .week-header{background:#ffeed9 !important}
+.week .week-body{background:#fff8ef}
+.week.complete .week-header{background:#f9dfbf !important}
+.week-note{background:#fff0dc;color:#7a4a26}
+.session.done-card{background:#fff2e2}
+.model{background:#fff7ed}
+.pace-token.pace-walk{background:#f8eee4;color:#765643}
+.pace-token.pace-jog{background:#ffead0;color:#8a542d}
+.pace-token.pace-fast{background:#ffd7a8;color:#874515}
+.fast{background:#fff0c9;color:#8a5a00}
+.menu-link{color:#79471f}
+.menu-link.active{background:#b86a2d;color:#fff}
+.pace-guide h2,.pace-card strong,.coach-detail summary,.update-banner strong{color:#75461f}
+.update-banner{box-shadow:0 10px 30px #7d4a2535}
+.back-to-top{box-shadow:0 8px 22px #7d4a2560}
+
+/* Comprendre les allures : repliable */
+details.pace-guide{padding:0;overflow:hidden}
+details.pace-guide > summary{
+  cursor:pointer;list-style:none;padding:18px;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;font-weight:700
+}
+details.pace-guide > summary::-webkit-details-marker{display:none}
+details.pace-guide > summary::after{content:"＋";font-size:22px;color:var(--accent-dark)}
+details.pace-guide[open] > summary::after{content:"−"}
+details.pace-guide[open] > summary{background:var(--soft)}
+details.pace-guide .pace-guide-content{padding:0 18px 18px}
+details.pace-guide .pace-guide-head p{margin-top:5px}
+
 </style>
 </head>
 <body>
@@ -196,8 +236,8 @@ button.secondary{background:#607987}
   <div class="top">
     <div>
       <h1>Programme Courons Ensemble</h1>
-      <p>8 semaines · 32 séances · votre progression reste enregistrée sur cet appareil.</p>
-      <span class="version">Version 1.2.4</span>
+      <p>9 semaines · 36 séances · votre progression reste enregistrée sur cet appareil.</p>
+      <span class="version">Version 1.2.5</span>
     </div>
     <label class="name">Prénom<input id="firstname" type="text" maxlength="40" placeholder="Votre prénom"></label>
   </div>
@@ -207,41 +247,45 @@ button.secondary{background:#607987}
     <a href="#conseils" class="menu-link">👨‍🏫 Conseils du coach</a>
   </nav>
 
-  <div class="progress-text"><span id="doneText">0 séance terminée sur 20</span><span id="percent">0 %</span></div>
+  <div class="progress-text"><span id="doneText">0 séance terminée sur 36</span><span id="percent">0 %</span></div>
   <div class="bar"><div id="bar"></div></div>
 </header>
 
 <main id="programme">
 
 
-<section class="pace-guide" aria-labelledby="paceTitle">
-  <div class="pace-guide-head">
-    <div>
+
+<details class="pace-guide" aria-labelledby="paceTitle">
+  <summary>
+    <div class="pace-guide-head">
       <h2 id="paceTitle">Comprendre les allures</h2>
       <p>Trois repères simples pour savoir comment réaliser les séances.</p>
     </div>
+  </summary>
+  <div class="pace-guide-content">
+    <div class="pace-grid">
+      <div class="pace-card walk">
+        <div class="pace-icon">🚶</div>
+        <div><strong>Marche</strong><p>Marche active entre les blocs : elle permet de récupérer sans s’arrêter complètement.</p></div>
+      </div>
+      <div class="pace-card jog">
+        <div class="pace-icon">🏃</div>
+        <div><strong>Footing</strong><p>Allure confortable et contrôlée. Vous devez pouvoir parler en phrases courtes.</p></div>
+      </div>
+      <div class="pace-card fastpace">
+        <div class="pace-icon">⚡</div>
+        <div><strong>Footing rapide</strong><p>Allure plus soutenue sur une courte durée. Vous pouvez encore prononcer quelques mots ; si vous ne pouvez plus parler du tout, ralentissez.</p></div>
+      </div>
+    </div>
   </div>
-  <div class="pace-grid">
-    <div class="pace-card walk">
-      <div class="pace-icon">🚶</div>
-      <div><strong>Marche</strong><p>Marche active entre les blocs : elle permet de récupérer sans s’arrêter complètement.</p></div>
-    </div>
-    <div class="pace-card jog">
-      <div class="pace-icon">🏃</div>
-      <div><strong>Footing</strong><p>Allure confortable et contrôlée. Vous devez pouvoir parler en phrases courtes.</p></div>
-    </div>
-    <div class="pace-card fastpace">
-      <div class="pace-icon">⚡</div>
-      <div><strong>Footing rapide</strong><p>Allure plus soutenue sur une courte durée. Vous pouvez encore prononcer quelques mots ; si vous ne pouvez plus parler du tout, ralentissez.</p></div>
-    </div>
-  </div>
-</section>
+</details>
+
 
 
 <div class="summary">
-  <div class="box"><small>Séances du programme</small><strong>32</strong></div>
+  <div class="box"><small>Séances du programme</small><strong>36</strong></div>
   <div class="box"><small>Terminées</small><strong id="doneCount">0</strong></div>
-  <div class="box"><small>Restantes</small><strong id="leftCount">32</strong></div>
+  <div class="box"><small>Restantes</small><strong id="leftCount">36</strong></div>
 </div>
 
 
@@ -923,6 +967,66 @@ button.secondary{background:#607987}
       </div>
     </article></div></div>
     </section>
+
+    <section class="week" data-week="9">
+      <button class="week-header" type="button" aria-expanded="true">
+        <span><strong>Semaine 9</strong><small>4 séances · cap final</small></span>
+        <span class="week-status">0 / 4</span><span class="chevron">⌄</span>
+      </button>
+      <div class="week-body">
+        <p class="week-note"><strong>🎯 Objectif :</strong> approcher puis réaliser 10 minutes continues en footing léger, à votre rythme. Les blocs sont plus longs : restez à allure très douce. Avant chaque séance, prévoyez 2 à 3 minutes d’échauffement dynamique.</p>
+        <div class="cards">
+    <article class="session" id="w9s1" data-id="w9s1">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 1</strong></label>
+        <span class="tag">Semaine 9</span>
+      </div>
+      <p class="exercise">1 × (7 min <span class="pace-token pace-jog">🏃 footing</span> + 1 min 30 <span class="pace-token pace-walk">🚶 marche</span>), puis 1 × (8 min <span class="pace-token pace-jog">🏃 footing</span> + 2 min <span class="pace-token pace-walk">🚶 marche</span>), puis 1 × (5 min <span class="pace-token pace-jog">🏃 footing</span> + 1 min <span class="pace-token pace-walk">🚶 marche</span>)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>24 min 30 s</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>31 min 30 s</strong></p>
+      <div class="fields"><label>Date<input class="date" type="date"></label><label>Ressenti<select class="feeling"><option value="">Non renseigné</option><option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option></select></label></div>
+    </article>
+
+    <article class="session" id="w9s2" data-id="w9s2">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 2</strong></label>
+        <span class="tag">Semaine 9</span>
+      </div>
+      <span class="fast">⚡ Footing rapide</span>
+      <p class="exercise">2 × (8 min <span class="pace-token pace-jog">🏃 footing</span> + 2 min <span class="pace-token pace-walk">🚶 marche</span>), puis 3 × (30 sec <span class="pace-token pace-fast">⚡ footing rapide</span> + 30 sec <span class="pace-token pace-jog">🏃 footing</span>), puis 1 × (5 min <span class="pace-token pace-jog">🏃 footing</span> + 1 min <span class="pace-token pace-walk">🚶 marche</span>)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>29 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>36 min</strong></p>
+      <div class="fields"><label>Date<input class="date" type="date"></label><label>Ressenti<select class="feeling"><option value="">Non renseigné</option><option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option></select></label></div>
+    </article>
+
+    <article class="session" id="w9s3" data-id="w9s3">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 3</strong></label>
+        <span class="tag">Semaine 9</span>
+      </div>
+      <span class="fast">🌿 Récupération</span>
+      <p class="exercise">1 × (8 min <span class="pace-token pace-jog">🏃 footing</span> + 2 min <span class="pace-token pace-walk">🚶 marche</span>), puis 1 × (9 min <span class="pace-token pace-jog">🏃 footing</span> + 2 min <span class="pace-token pace-walk">🚶 marche</span>)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>21 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>28 min</strong></p>
+      <div class="fields"><label>Date<input class="date" type="date"></label><label>Ressenti<select class="feeling"><option value="">Non renseigné</option><option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option></select></label></div>
+    </article>
+
+    <article class="session" id="w9s4" data-id="w9s4">
+      <div class="session-top">
+        <label class="done-label"><input class="done" type="checkbox"> <strong>Séance 4</strong></label>
+        <span class="tag">Semaine 9</span>
+      </div>
+      <span class="fast">🎯 Objectif · ⚡ Footing rapide</span>
+      <p class="exercise">🎯 1 × <strong>10 min continues</strong> en <span class="pace-token pace-jog">🏃 footing léger</span>, puis 1 × (7 min <span class="pace-token pace-jog">🏃 footing</span> + 2 min <span class="pace-token pace-walk">🚶 marche</span>), puis 1 × (5 min <span class="pace-token pace-jog">🏃 footing</span> + 2 min <span class="pace-token pace-walk">🚶 marche</span>), puis 3 × (30 sec <span class="pace-token pace-fast">⚡ footing rapide</span> + 30 sec <span class="pace-token pace-jog">🏃 footing</span>)</p>
+      <p class="sessiontime">🏃 Temps de la séance : <strong>29 min</strong></p>
+      <p class="total">⏱ Temps total (2 min échauffement + séance + 5 min marche) : <strong>36 min</strong></p>
+      <div class="fields"><label>Date<input class="date" type="date"></label><label>Ressenti<select class="feeling"><option value="">Non renseigné</option><option>Facile</option><option>Moyen</option><option>Difficile</option><option>À refaire</option></select></label></div>
+    </article>
+        </div>
+        <p class="week-note" style="margin-top:14px"><strong>💡 Si une séance semble facile :</strong> restez à votre allure habituelle. La progression est dans le plan, pas dans l’effort du jour. Si un bloc est trop difficile, terminez son chrono en marche rapide et refaites la même séance avant de progresser, lorsque votre corps le permet.</p>
+      </div>
+    </section>
+
 </main>
 <section class="coach" id="conseils">
   <div class="section-title"><h2>Conseils du coach</h2><p>Touchez le + pour ouvrir une fiche complète issue des points du jour du programme.</p></div>
@@ -981,6 +1085,29 @@ button.secondary{background:#607987}
     <h4>La règle pratique</h4><p>La semaine 8 propose de surveiller particulièrement une douleur qui persiste au-delà de 48 heures ou revient systématiquement au même endroit. En cas de doute, remplacez temporairement la course par une <span class="pace-token pace-walk">🚶 marche</span> active et demandez un avis professionnel si la douleur persiste ou s'aggrave.</p>
   </div></details>
 
+
+  <details class="coach-detail"><summary>🛌 Récupération — courir moins, c’est parfois progresser plus</summary><div>
+    <h4>Le principe</h4>
+    <p>Après neuf semaines de pratique, le point du jour rappelle que l’adaptation se construit aussi après l’effort. Une séance n’a pas à être réalisée coûte que coûte si la fatigue est inhabituelle : en activité physique adaptée, écouter son corps prime sur le calendrier.</p>
+    <h4>Quand alléger ou reporter</h4>
+    <ul>
+      <li>Jambes lourdes dès les premières minutes et qui ne s’améliorent pas à l’échauffement.</li>
+      <li>Fréquence cardiaque au repos plus élevée que d’habitude au réveil.</li>
+      <li>Irritabilité, manque de motivation inhabituel ou sommeil perturbé.</li>
+      <li>Courbatures persistantes depuis plus de 72 heures.</li>
+    </ul>
+    <h4>Trois options proposées</h4>
+    <ul>
+      <li><strong>Remplacer la course par 30 à 40 minutes de marche active</strong> pour maintenir l’habitude tout en récupérant.</li>
+      <li><strong>Reporter la séance au lendemain</strong> plutôt que de forcer en état de fatigue.</li>
+      <li><strong>Faire une séance réduite</strong> : environ la moitié du programme, à allure très douce, puis s’arrêter si nécessaire.</li>
+    </ul>
+    <h4>Récupération active et sommeil</h4>
+    <p>Le point du jour propose la marche, des étirements doux et la mobilité articulaire comme formes de récupération active. Il insiste aussi sur le sommeil, présenté comme un élément majeur de la réparation musculaire et de l’intégration des adaptations liées à l’entraînement.</p>
+    <h4>Après neuf semaines</h4>
+    <p>La suite n’est pas forcément d’en faire davantage : l’objectif est de maintenir la régularité, varier les parcours et poursuivre le renforcement musculaire. <strong>L’activité physique adaptée est un chemin, pas une destination.</strong></p>
+    <p><em>Source indiquée dans le programme : International Journal of Sports Physiology and Performance · Meeusen et al., 2013 — Prevention, diagnosis and treatment of the overtraining syndrome.</em></p>
+  </div></details>
   </div>
 </section>
 
@@ -997,7 +1124,7 @@ button.secondary{background:#607987}
 (function(){
   var KEY="Programme_Courons_Ensemble_v4";
   var nameKey=KEY+"_prenom";
-  var TOTAL=32;
+  var TOTAL=36;
   var fields=["done","date","feeling"];
   var saved={};
   try{saved=JSON.parse(localStorage.getItem(KEY)||"{}");}catch(e){saved={};}
